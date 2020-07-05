@@ -6,6 +6,7 @@ import Saved from "./pages/Saved.js";
 import Search from "./pages/Search.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavBar from "./components/NavBar";
+console.log("Google API Key", process.env.REACT_APP_GOOGLE_API_KEY);
 
 function App() {
   return (

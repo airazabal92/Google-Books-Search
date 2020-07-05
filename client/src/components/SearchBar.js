@@ -3,7 +3,8 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import FormControl from "react-bootstrap/FormControl";
 
-function SearchBar() {
+function SearchBar(props) {
+  console.log("Search Props ", props);
   const style = {
     searchContainer: {
       width: "65%",
@@ -17,9 +18,13 @@ function SearchBar() {
           placeholder="Search for book"
           aria-label="Search for book"
           aria-describedby="basic-addon2"
+          name="searchQuery"
+          onChange={props.onInputChange}
         />
         <InputGroup.Append>
-          <Button variant="outline-secondary">Search</Button>
+          <Button onClick={props.handleFormSubmit} variant="outline-secondary">
+            Search
+          </Button>
         </InputGroup.Append>
       </InputGroup>
     </div>
