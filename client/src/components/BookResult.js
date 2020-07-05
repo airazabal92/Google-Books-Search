@@ -29,7 +29,7 @@ function BookResult() {
       </Row>
       <Row>
         <Col sm={3}>
-          <img src="https://via.placeholder.com/150"></img>
+          <img src="https://via.placeholder.com/150" alt="Book cover"></img>
         </Col>
         <Col sm={9}>
           <p>

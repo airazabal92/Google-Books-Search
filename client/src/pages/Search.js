@@ -10,7 +10,11 @@ function Search() {
   const [searchQuery, setSearchQuery] = useState();
 
   // Get book info from Google Books API
-  function getBookInfo() {}
+  function getBookInfo() {
+    GoogleBooks.searchBooks(searchQuery.search)
+      .then((res) => console.log("Google Books API Response", res))
+      .catch((err) => console.log(err));
+  }
 
   // Handles updating state of search query
   function handleInputChange(event) {
@@ -19,16 +23,20 @@ function Search() {
     console.log("Search Query", searchQuery);
   }
 
-  // Function to handle on click of search button
+  // Function to handle click of search button
   function handleFormSubmit(event) {
     event.preventDefault();
     console.log("Submitted!");
+    getBookInfo();
   }
 
   return (
     <div>
       <Header />
-      <SearchBar onInputChange={handleInputChange} onClick={handleFormSubmit} />
+      <SearchBar
+        onInputChange={handleInputChange}
+        onFormSubmit={handleFormSubmit}
+      />
       <SearchResults />
     </div>
   );

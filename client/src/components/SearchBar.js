@@ -18,11 +18,11 @@ function SearchBar(props) {
           placeholder="Search for book"
           aria-label="Search for book"
           aria-describedby="basic-addon2"
-          name="searchQuery"
+          name="search"
           onChange={props.onInputChange}
         />
         <InputGroup.Append>
-          <Button onClick={props.handleFormSubmit} variant="outline-secondary">
+          <Button onClick={props.onFormSubmit} variant="outline-secondary">
             Search
           </Button>
         </InputGroup.Append>
