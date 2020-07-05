@@ -7,7 +7,6 @@ import SearchResults from "../components/SearchResults";
 function Search() {
   return (
     <div>
-      <NavBar />
       <Header />
       <SearchBar />
       <SearchResults />

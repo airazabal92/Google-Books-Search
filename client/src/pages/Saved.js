@@ -6,7 +6,6 @@ import SavedBooks from "../components/SavedResults";
 function Saved() {
   return (
     <div>
-      <NavBar />
       <Header />
       <SavedBooks></SavedBooks>
     </div>
