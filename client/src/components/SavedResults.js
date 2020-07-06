@@ -11,7 +11,6 @@ function SavedBooks() {
   return (
     <div>
       <h4 style={style.header}>Saved Books</h4>
-      <BookResult></BookResult>
     </div>
   );
 }

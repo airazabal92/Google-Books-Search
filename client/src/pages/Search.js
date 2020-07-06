@@ -43,6 +43,10 @@ function Search() {
     getBookInfo();
   }
 
+  function handleSave(id) {
+    console.log("Save for " + id + " clicked!");
+  }
+
   return (
     <div>
       <Header />
@@ -62,6 +66,8 @@ function Search() {
             authors={book.volumeInfo.authors}
             description={book.volumeInfo.description}
             thumb={book.volumeInfo.imageLinks.thumbnail}
+            onSaveClick={handleSave}
+            bookId={book.id}
             key={book.id}
           ></BookResult>
         ))

@@ -36,7 +36,12 @@ function BookResult(props) {
             </Col>
             <Col style={style.buttons} sm={4}>
               <Button variant="outline-dark">View</Button>{" "}
-              <Button variant="outline-dark">Delete</Button>{" "}
+              <Button
+                onClick={() => props.onSaveClick(props.bookId)}
+                variant="outline-dark"
+              >
+                Save
+              </Button>{" "}
             </Col>
           </Row>
           <Row>
