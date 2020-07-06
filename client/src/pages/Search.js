@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
-import SearchResults from "../components/SearchResults";
 import GoogleBooks from "../utils/GoogleBooks";
+import BookResult from "../components/BookResult";
+
+const style = {
+  header: {
+    textAlign: "center",
+    paddingBottom: "20px"
+  }
+};
 
 function Search() {
   // Set initial component state for books
   const [books, setBooks] = useState({});
+  const [searchNotDone, setSearchNotDone] = useState(true);
   const [searchQuery, setSearchQuery] = useState();
 
   // Get book info from Google Books API & set response to books variable
@@ -15,6 +23,7 @@ function Search() {
       .then((res) => {
         console.log("Google Books API Response", res);
         setBooks(res);
+        setSearchNotDone(false);
       })
       .catch((err) => console.log(err));
   }
@@ -30,6 +39,7 @@ function Search() {
   function handleFormSubmit(event) {
     event.preventDefault();
     console.log("Submitted!");
+
     getBookInfo();
   }
 
@@ -40,7 +50,22 @@ function Search() {
         onInputChange={handleInputChange}
         onFormSubmit={handleFormSubmit}
       />
-      <SearchResults books={books} />
+
+      {searchNotDone ? <div></div> : <h4 style={style.header}>Results</h4>}
+
+      {searchNotDone ? (
+        <div></div>
+      ) : (
+        books.data.items.map((book) => (
+          <BookResult
+            title={book.volumeInfo.title}
+            authors={book.volumeInfo.authors}
+            description={book.volumeInfo.description}
+            thumb={book.volumeInfo.imageLinks.thumbnail}
+            key={book.id}
+          ></BookResult>
+        ))
+      )}
     </div>
   );
 }

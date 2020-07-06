@@ -12,56 +12,42 @@ const style = {
     border: "1px solid darkgrey",
     padding: "25px",
     marginBottom: "20px"
-  },
-  header: {
-    textAlign: "center",
-    paddingBottom: "20px"
   }
 };
 
 function BookResult(props) {
-  console.log("BOOKS IN RESULT", props.books);
-  if (Object.keys(props.books) == 0) {
+  if (props.numBooks == 0) {
     return null;
   } else {
-    console.log(props.books.data.items);
     return (
       <div>
-        <h4 style={style.header}>Results</h4>
-        {props.books.data.items.map((book) => (
-          <Container style={style.container}>
-            <Row>
-              <Col sm={8}>
-                <h5>{book.volumeInfo.title}</h5>
-                <p>
-                  Written by:{" "}
-                  {book.volumeInfo.authors.length >= 2 ? (
-                    book.volumeInfo.authors.map((author) => (
-                      <span>{author}, </span>
-                    ))
-                  ) : (
-                    <span>{book.volumeInfo.authors}</span>
-                  )}
-                </p>
-              </Col>
-              <Col style={style.buttons} sm={4}>
-                <Button variant="outline-dark">View</Button>{" "}
-                <Button variant="outline-dark">Delete</Button>{" "}
-              </Col>
-            </Row>
-            <Row>
-              <Col sm={3}>
-                <img
-                  src={book.volumeInfo.imageLinks.thumbnail}
-                  alt="Book cover"
-                ></img>
-              </Col>
-              <Col sm={9}>
-                <p>{book.volumeInfo.description}</p>
-              </Col>
-            </Row>
-          </Container>
-        ))}
+        <Container style={style.container}>
+          <Row>
+            <Col sm={8}>
+              <h5>{props.title}</h5>
+              <p>
+                Written by:{" "}
+                {props.authors.length >= 2 ? (
+                  props.authors.map((author) => <span>{author}, </span>)
+                ) : (
+                  <span>{props.authors}</span>
+                )}
+              </p>
+            </Col>
+            <Col style={style.buttons} sm={4}>
+              <Button variant="outline-dark">View</Button>{" "}
+              <Button variant="outline-dark">Delete</Button>{" "}
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={3}>
+              <img src={props.thumb} alt="Book cover"></img>
+            </Col>
+            <Col sm={9}>
+              <p>{props.description}</p>
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }
