@@ -1,17 +1,10 @@
 import React from "react";
 import BookResult from "./BookResult";
 
-function SearchResults() {
-  const style = {
-    header: {
-      textAlign: "center",
-      paddingBottom: "20px"
-    }
-  };
+function SearchResults(props) {
   return (
     <div>
-      <h4 style={style.header}>Results</h4>
-      <BookResult></BookResult>
+      <BookResult books={props.books}></BookResult>
     </div>
   );
 }

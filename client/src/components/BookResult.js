@@ -10,43 +10,61 @@ const style = {
   },
   container: {
     border: "1px solid darkgrey",
-    padding: "25px"
+    padding: "25px",
+    marginBottom: "20px"
+  },
+  header: {
+    textAlign: "center",
+    paddingBottom: "20px"
   }
 };
 
-function BookResult() {
-  return (
-    <Container style={style.container}>
-      <Row>
-        <Col sm={8}>
-          <h5>Harry Potter's Bookshelf</h5>
-          <p>Written by:</p>
-        </Col>
-        <Col style={style.buttons} sm={4}>
-          <Button variant="outline-dark">View</Button>{" "}
-          <Button variant="outline-dark">Delete</Button>{" "}
-        </Col>
-      </Row>
-      <Row>
-        <Col sm={3}>
-          <img src="https://via.placeholder.com/150" alt="Book cover"></img>
-        </Col>
-        <Col sm={9}>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
-          </p>
-        </Col>
-      </Row>
-    </Container>
-  );
+function BookResult(props) {
+  console.log("BOOKS IN RESULT", props.books);
+  if (Object.keys(props.books) == 0) {
+    return null;
+  } else {
+    console.log(props.books.data.items);
+    return (
+      <div>
+        <h4 style={style.header}>Results</h4>
+        {props.books.data.items.map((book) => (
+          <Container style={style.container}>
+            <Row>
+              <Col sm={8}>
+                <h5>{book.volumeInfo.title}</h5>
+                <p>
+                  Written by:{" "}
+                  {book.volumeInfo.authors.length >= 2 ? (
+                    book.volumeInfo.authors.map((author) => (
+                      <span>{author}, </span>
+                    ))
+                  ) : (
+                    <span>{book.volumeInfo.authors}</span>
+                  )}
+                </p>
+              </Col>
+              <Col style={style.buttons} sm={4}>
+                <Button variant="outline-dark">View</Button>{" "}
+                <Button variant="outline-dark">Delete</Button>{" "}
+              </Col>
+            </Row>
+            <Row>
+              <Col sm={3}>
+                <img
+                  src={book.volumeInfo.imageLinks.thumbnail}
+                  alt="Book cover"
+                ></img>
+              </Col>
+              <Col sm={9}>
+                <p>{book.volumeInfo.description}</p>
+              </Col>
+            </Row>
+          </Container>
+        ))}
+      </div>
+    );
+  }
 }
 
 export default BookResult;

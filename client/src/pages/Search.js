@@ -6,13 +6,16 @@ import GoogleBooks from "../utils/GoogleBooks";
 
 function Search() {
   // Set initial component state for books
-  const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState({});
   const [searchQuery, setSearchQuery] = useState();
 
-  // Get book info from Google Books API
+  // Get book info from Google Books API & set response to books variable
   function getBookInfo() {
     GoogleBooks.searchBooks(searchQuery.search)
-      .then((res) => console.log("Google Books API Response", res))
+      .then((res) => {
+        console.log("Google Books API Response", res);
+        setBooks(res);
+      })
       .catch((err) => console.log(err));
   }
 
@@ -37,7 +40,7 @@ function Search() {
         onInputChange={handleInputChange}
         onFormSubmit={handleFormSubmit}
       />
-      <SearchResults />
+      <SearchResults books={books} />
     </div>
   );
 }
